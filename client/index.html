@@ -4,9 +4,45 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles.css">
     <title>Deez Recipes</title>
 </head>
 <body>
-    
+    <header>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather&family=Rubik+Mono+One&display=swap" rel="stylesheet">
+        <span id="slogan">Just recipes. No articles. No subscriptions. No bull.</span>
+        <div>
+            <h1>No Bull Recipes</h1>
+            <nav>
+                <li>Home</li>
+                <li id="addRecipeLink">Add Recipe</li>
+                <li>View Recipes</li>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <section id="recipeDisplay">
+
+        </section>
+        <section id="recipeSect">
+
+        </section>
+        <form id="newRecipe" class="hidden">
+        <p>Recipe name:</p><input type="text" id="name" placeholder="ex: Mac & Cheese">
+        <p>Prep time (enter number only in Min):</p><input type="text" id="prepTimeInput" placeholder="ex: 10">
+        <p>Cook Time (enter number only in Min):</p><input type="text" id="cookTimeInput" placeholder="ex: 15">
+        <p>Serves (enter number of people fed):</p><input type="text" id="servesInput" placeholder="ex: 6">
+        <p>Picture URL:</p><input type="text" id="pictureInput" placeholder="mac.jpeg">
+        <p>Ingredients (enter amount and ingredient name):</p><input type="text" id="ingredientInput" placeholder="ex: 1tsb salt"><button id="addIngredient">Add Ingredient</button>
+        <ol id="ingredientList">Current Ingredients: </ol>
+        <p>Steps/Directions:</p><input type="text" id="directionsInput" placeholder="ex: boil noodles in water for 7 minutes"><button id="addStep">Add Step</button>
+        <ol id="directionsList">Directions:</ol>
+        <button id="submitRecipe">Submit Recipe</button>
+    </form>
+    </main>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./index.js"></script>
 </body>
 </html>

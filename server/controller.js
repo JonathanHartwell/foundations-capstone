@@ -7,13 +7,23 @@ module.exports = {
         res.status(200).send(recipes)
     },
 
+    getRecipeById: (req, res) => {
+        const index = recipes.findIndex((el) => el.id === +req.params.id)
+
+        
+
+        res.status(200).send(recipes[index])
+    },
+
     addRecipe: (req, res) => {
-        const {name, info, ingredients, url, directions} = req.body
+        const {name, prepTime, cookTime, serves, ingredients, url, directions} = req.body
 
         let newRecipe = {
             id: globalID,
             name: name,
-            info: info,
+            prepTime: prepTime,
+            cookTime: cookTime,
+            serves: serves,
             ingredients: ingredients,
             picture: url,
             directions: directions,

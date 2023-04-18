@@ -6,9 +6,10 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
-const {getAllRecipes, addRecipe, deleteRecipe, updateRecipe} = require('./controller')
+const {getAllRecipes, addRecipe, deleteRecipe, updateRecipe, getRecipeById} = require('./controller')
 
 app.get('/recipes', getAllRecipes)
+app.get('/recipes/:id', getRecipeById)
 app.post('/recipes', addRecipe)
 app.delete('/recipes/:id', deleteRecipe)
 app.put('/recipes/:id', updateRecipe)
