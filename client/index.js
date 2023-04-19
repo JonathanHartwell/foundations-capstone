@@ -1,8 +1,3 @@
-//known bugs. when creating recipe ingriends and directions not displaying
-//when viewing a recipe prep time and cook time and total time are undefined
-//clearing the input fields when pressing submit is a wanted feature
-
-
 const baseURL = 'http://localhost:5896'
 
 
@@ -21,6 +16,8 @@ const recipeSect = document.querySelector('#recipeSect')
 let newRecipeEle = document.getElementById('newRecipe')
 let recipeDisplayEle = document.getElementById('recipeDisplay')
 let recipeSectEle = document.getElementById('recipeSect')
+let ingredientInput = document.querySelector('#ingredientInput')
+let directionsInput = document.querySelector('directionsInput')
 
 
 
@@ -32,26 +29,27 @@ const createRecipeCard = (recipe) => {
     newRecipeCard.classList.add('recipe-card')
 
     newRecipeCard.innerHTML = `
-    <div>
-    <img onclick="createRecipeDisplay(${recipe.id})" class="cardpic" alt='recipe picture' src='${recipe.picture}'/>
-    </div>
-    <p>${recipe.name}</p>
-
+    <div id="recipeCardContainer" class="container">
+    <img onclick="createRecipeDisplay(${recipe.id})"  class="cardpic" "container-background" alt='recipe picture' src='${recipe.picture}'/>
+    <div class="recipename"><h3 class="recipenameh3">${recipe.name}</h3></div>
+    <div class="bottomcard">
     <section>
-        <button onclick="updateRecipe(${recipe.id}, 'dislike')">Dislike</button>
-        YumMeter: ${recipe.score}
-        <button onclick="updateRecipe(${recipe.id}, 'like')">Like</button>
+    <button onclick="updateRecipe(${recipe.id}, 'dislike')">Dislike</button>
+    YumMeter: ${recipe.score}
+    <button onclick="updateRecipe(${recipe.id}, 'like')">Like</button>
     </section>
     <button onclick="deleteRecipe(${recipe.id})">Delete Recipe</button>
     <p class="hidden"></p>
+    </div>
+    </div>
     `
 
     displayRecipes.appendChild(newRecipeCard)
 }
 
+let container = document.querySelector("#recipeCardContainer")
 
 const createRecipeDisplay = (id) => {
-
     newRecipeEle.classList.add("hidden")
     recipeDisplayEle.classList.add("hidden")
     recipeSectEle.classList.remove("hidden")
@@ -60,6 +58,7 @@ const createRecipeDisplay = (id) => {
     axios.get(`${baseURL}/recipes/${id}`)
         .then((res) => {
             console.log(res.data)
+
     const newRecipeDisplay = document.createElement('section')
     
     newRecipeDisplay.innerHTML = ``
@@ -69,7 +68,7 @@ const createRecipeDisplay = (id) => {
             <h2>${res.data.name}</h2>
             <p>Prep Time ${res.data.prepTime} Minutes</p>
             <p>Cook Time ${res.data.cookTime} Minutes</p>
-            <p>Total Time ${res.data.prepTime + res.data.cookTime} Minutes</p>
+            <p>Total Time ${Number(res.data.prepTime) + Number(res.data.cookTime)} Minutes</p>
             <p>Servings ${res.data.serves}</p>
         </div>
         <div class="recipePic">
@@ -90,7 +89,6 @@ const createRecipeDisplay = (id) => {
                 return `<li>${index}</li>`
             }).join('')}
         </ol>
-
     `
     recipeSect.appendChild(newRecipeDisplay)
         })
@@ -119,6 +117,7 @@ const getAllRecipes = () => {
 
 let ingredientArr = []
 
+
 const addNewIngredient = (event) => {
     event.preventDefault();
 
@@ -127,6 +126,7 @@ const addNewIngredient = (event) => {
     ingredientList.innerHTML = `Current Ingredients: ${ingredientArr.join(', ')} `
     ingredientList.appendChild(ingredientsDisplay)
     console.log(ingredientArr)
+    ingredientInput.value = ""
 }
 
 let stepsArr = []
@@ -139,6 +139,7 @@ const addNewStep = (event) => {
     stepList.innerHTML = stepsArr.map(i =>`<li>${i}</li>`).join("")
     // stepList.appendChild(directionsDisplay)
     console.log(stepsArr)
+    directionsInput.value = ""
 
 
 }
@@ -177,6 +178,11 @@ const addRecipe = (event) => {
             console.log(theseHands)
         })
 
+    unhideViewRecipes()
+        
+    var allInputs = document.querySelectorAll('input')
+    allInputs.forEach(singleInput => singleInput.value = '')
+
 }
 
 
@@ -212,6 +218,7 @@ const updateRecipe = (id, type) => {
         })
 
 }
+
 
 const unhideAddRecipe = () => {
     newRecipeEle.classList.remove("hidden")

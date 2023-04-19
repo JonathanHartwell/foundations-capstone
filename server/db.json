@@ -2,8 +2,8 @@
     {
         "id": 1,
         "name": "Chicken & Biscuits Bake",
-        "prep-time": 10,
-        "cook-time": 25,
+        "prepTime": 10,
+        "cookTime": 25,
         "serves": 6,
         "ingredients": ["6 tablespoons butter", "1 chopped onion", "1/2 cup flour", "3 cups chicken broth", "1 teaspoon salt", "1 teaspoon pepper", "1 cup heavy cream", "2 and 1/2 cups frozen mixed vegetable", "1 shredded rotisserie chicken", "2 tubes biscuit dough (8 biscuits each)"],
         "picture": "https://drive.google.com/uc?export=download&id=1ZB24P1j-0BoKwx30GgwlSM3BTSWYdbBe",
@@ -13,8 +13,8 @@
     {
         "id": 2,
         "name": "Air Fryer Fajitas",
-        "prep-time": 10,
-        "cook-time": 15,
+        "prepTime": 10,
+        "cookTime": 15,
         "serves": 4,
         "ingredients": ["1 tsp kosher salt", "1 tsp ground cumin", "1 tsp chili powder", "1 tsp smoked paprika", "1 tsp sugar", "1/2 tsp garlic powder", "1/2 tsp onion powder", "1/2 tsp black pepper"],
         "picture": "https://drive.google.com/uc?export=download&id=1zag3CbeqJ4-6shlWULeseiNoPLgsWDk2",

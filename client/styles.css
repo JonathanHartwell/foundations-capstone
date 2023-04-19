@@ -11,6 +11,7 @@
     font-family: 'Merriweather', serif;
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
+    background-color: #66635B;
   }
   img, picture, video, canvas, svg {
     display: block;
@@ -28,7 +29,7 @@
 
 main {
   display: flex;
-  flex-direction: column;
+  flex-direction: column;  
 }
 
 #header{
@@ -46,6 +47,11 @@ nav {
   justify-content: space-around;
   width: 40%;
 }
+
+nav :hover {
+  cursor: pointer;
+}
+
 #slogan {
     display: flex;
     background-color: #66635B;
@@ -55,8 +61,48 @@ nav {
     justify-content: center;
 }
 
+
+.container {
+  position: relative;
+  text-align: center;
+  
+}
+
+
+.container:hover {
+  transform: scale(1.05);
+  transition: .3s ease;
+}
+
+#recipeDisplay:hover .container:not(:hover) {
+  filter: brightness(0.8) contrast(1.2) blur(5px);
+  scale: .95;
+  transition: .3s ease;
+}
+
+
+.recipename {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  padding-right: 2%;
+  background-color: #BEB7A480;  
+  }
+
+.bottomcard {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  background-color: #BEB7A480;
+}
+
+.recipenameh3 {
+  margin-left: 8px;
+}
+
 .cardpic {
-    height: 40vh;
+    height: 35vh;
     width: 30vh;
     object-fit: cover;
 }
@@ -71,7 +117,6 @@ nav {
 
 .recipe-card {
     display: flex;
-    background-color: gray;
     flex-direction: column;
     justify-content: space-around;
         
@@ -132,4 +177,8 @@ justify-content: center;
   margin-left: 25%;
   width: 50%;
   margin-top: 5%;
+}
+
+button :hover {
+  cursor: pointer;
 }

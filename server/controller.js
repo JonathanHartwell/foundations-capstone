@@ -16,7 +16,7 @@ module.exports = {
     },
 
     addRecipe: (req, res) => {
-        const {name, prepTime, cookTime, serves, ingredients, url, directions} = req.body
+        const {name, prepTime, cookTime, serves, ingredients, picture, directions} = req.body
 
         let newRecipe = {
             id: globalID,
@@ -25,7 +25,7 @@ module.exports = {
             cookTime: cookTime,
             serves: serves,
             ingredients: ingredients,
-            picture: url,
+            picture: picture,
             directions: directions,
             score: 0
         }
