@@ -1,3 +1,8 @@
+//known bugs. when creating recipe ingriends and directions not displaying
+//when viewing a recipe prep time and cook time and total time are undefined
+//clearing the input fields when pressing submit is a wanted feature
+
+
 const baseURL = 'http://localhost:5896'
 
 
@@ -11,7 +16,11 @@ const stepList = document.querySelector('#directionsList')
 const submitStep = document.querySelector('#addStep')
 const recipeCards = document.querySelector('.recipe-card')
 const addRecipeLink = document.querySelector('#addRecipeLink')
+const viewRecipesLink = document.querySelector('#viewRecipesLink')
 const recipeSect = document.querySelector('#recipeSect')
+let newRecipeEle = document.getElementById('newRecipe')
+let recipeDisplayEle = document.getElementById('recipeDisplay')
+let recipeSectEle = document.getElementById('recipeSect')
 
 
 
@@ -43,29 +52,45 @@ const createRecipeCard = (recipe) => {
 
 const createRecipeDisplay = (id) => {
 
+    newRecipeEle.classList.add("hidden")
+    recipeDisplayEle.classList.add("hidden")
+    recipeSectEle.classList.remove("hidden")
+
+    recipeSect.innerHTML = ``
     axios.get(`${baseURL}/recipes/${id}`)
         .then((res) => {
             console.log(res.data)
     const newRecipeDisplay = document.createElement('section')
-    let totalTime = res.data.prepTime + res.data.cookTime
+    
+    newRecipeDisplay.innerHTML = ``
     newRecipeDisplay.innerHTML = `
-    <section id="titleAndFavorite">
-        <h2>${res.data.name}</h2> <button id="favorite">Favorite</button>
-    </section>
     <section id="recipeInfo">
-        <div id="timesAndServes">
+        <div class="times">
+            <h2>${res.data.name}</h2>
             <p>Prep Time ${res.data.prepTime} Minutes</p>
             <p>Cook Time ${res.data.cookTime} Minutes</p>
-            <p>Total Time ${totalTime} Minutes</p>
+            <p>Total Time ${res.data.prepTime + res.data.cookTime} Minutes</p>
             <p>Servings ${res.data.serves}</p>
         </div>
+        <div class="recipePic">
+        <img class="recipePic" src='${res.data.picture}'>
+        </div>
+        <div class="iList">
         <ul>
-
+        <h3>Ingredients:</h3>
+        ${res.data.ingredients.map((index) => {
+            return `<li>${index}</li>`
+        }).join('')}
         </ul>
-        <ol>
+        </div>
+    </section>
+    <ol class="directions">
+    <h3>Directions:</h3>
+            ${res.data.directions.map((index) =>{
+                return `<li>${index}</li>`
+            }).join('')}
         </ol>
 
-    </section>
     `
     recipeSect.appendChild(newRecipeDisplay)
         })
@@ -101,7 +126,7 @@ const addNewIngredient = (event) => {
     ingredientArr.push(ingredient.value)
     ingredientList.innerHTML = `Current Ingredients: ${ingredientArr.join(', ')} `
     ingredientList.appendChild(ingredientsDisplay)
-    console.log(ingredientArr)    
+    console.log(ingredientArr)
 }
 
 let stepsArr = []
@@ -155,17 +180,6 @@ const addRecipe = (event) => {
 }
 
 
-// const selectRecipe = (id) => {
-//     axios.get(`${baseURL}/recipes/${id}`)
-//         .then((res) => {
-//             createRecipeDisplay(res.data)
-//         })
-//         .catch((theseHands) => {
-//             console.log(theseHands)
-//         })
-// }
-
-
 const deleteRecipe = (id) => {
 
     axios.delete(`${baseURL}/recipes/${id}`)
@@ -200,13 +214,19 @@ const updateRecipe = (id, type) => {
 }
 
 const unhideAddRecipe = () => {
-    let element = document.getElementById('newRecipe')
-    element.classList.remove("hidden")
+    newRecipeEle.classList.remove("hidden")
+    recipeDisplayEle.classList.add("hidden")
+    recipeSectEle.classList.add("hidden")
 }
 
+const unhideViewRecipes = () => {
+    recipeDisplayEle.classList.remove("hidden")
+    newRecipeEle.classList.add("hidden")
+    recipeSectEle.classList.add("hidden")
+}
 
+viewRecipesLink.addEventListener('click', unhideViewRecipes)
 addRecipeLink.addEventListener('click', unhideAddRecipe)
-recipeCards,addEventListener('click', createRecipeDisplay)
 addStep.addEventListener('click', addNewStep)
 addIngredient.addEventListener('click', addNewIngredient)
 addNewRecipe.addEventListener('click', addRecipe)

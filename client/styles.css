@@ -26,6 +26,26 @@
     isolation: isolate;
   }
 
+main {
+  display: flex;
+  flex-direction: column;
+}
+
+#header{
+  background-color: #BEB7A4;
+  flex-direction: column;
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 40%;
+}
 #slogan {
     display: flex;
     background-color: #66635B;
@@ -43,8 +63,9 @@
 
 #recipeDisplay {
     display: flex;
-    gap: 5px;
+    gap: 5%;
     justify-content: center;
+    margin-top: 5%;
 
 }
 
@@ -57,5 +78,58 @@
 }
 
 .hidden {
-    transform: scale(0);
+  visibility: hidden;
+  max-height: 0;
+    /* transform: scale(0); */
+    /* width: 0px;
+    height: 0px; */
+}
+
+#recipeInfo{
+  display: flex;
+  justify-content: center;
+  margin-top: 2%;
+  gap: 5%;
+}
+
+.times {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+#newRecipe{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+#directionsInput{
+  width: 70%
+}
+
+.recipePic {
+  height: 450px;
+  width: 450px;
+  object-fit: cover;
+}
+
+.iList {
+display: flex;
+flex-direction: column;
+justify-content: center;
+}
+
+.directions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 25%;
+  width: 50%;
+  margin-top: 5%;
 }
